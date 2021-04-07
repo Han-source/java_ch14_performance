@@ -1,5 +1,6 @@
 package pipeAndFilter.pipe_foundations;
 
+//Fan-In Fan-out
 public abstract class Filter<I, O> extends ThreadedRunner {
 	protected Pipe<I> input;
 	protected Pipe<O> output;
