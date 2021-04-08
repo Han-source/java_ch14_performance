@@ -6,15 +6,15 @@ package step09_bufferThread;
  */
 class Buffer {
 	private int data;
-	private boolean empty = true;
+	private boolean filled = true;
 	public synchronized int get() {
-		while(empty) {
+		while(!filled) {
 			try {wait();}
 			 catch(InterruptedException e) {
 				
 			}
 		}
-			empty = true;
+			filled = false;
 			notifyAll();
 			return data;
 			
@@ -22,13 +22,13 @@ class Buffer {
 
 	}
 	public synchronized void put (int data) {
-		while (!empty) {
+		while (filled) {
 			try {wait();}
 			catch (InterruptedException e) {
 				
 			}
 		}
-			empty = false;
+			filled = true;
 			this.data = data;
 			notifyAll();
 		
